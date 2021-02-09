@@ -1,5 +1,5 @@
 # Share-A-Meal
-an app  in progreess to help the less previdged ones to secure their Meals
+an app  in progress to help the less previdged ones to secure their Meals
 
 # LICENSE
 ```
