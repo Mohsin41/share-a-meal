@@ -1,0 +1,20 @@
+{
+  "name": "Share-A-Meal",
+  "version": "1.0.0",
+  "description": "an app  in progreess to help the less previdged ones to secure their Meals",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mohsin41/Share-A-Meal.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mohsin41/Share-A-Meal/issues"
+  },
+  "homepage": "https://github.com/Mohsin41/Share-A-Meal#readme"
+}
