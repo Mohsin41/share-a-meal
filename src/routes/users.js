@@ -1,42 +1,62 @@
-const express = require('express');
+const express = require('express')
 
-const router = express.Router();
+const router = express.Router()
 
 const FoodAngel = require('../models/foodangel.js')
 const Beneficiary = require('../models/beneficiary.js')
 
-const flames = new FoodAngel('flames', 'tonsberg', 95273973, 'example@gmail.com')
-const taste = new FoodAngel('taste', 'tonsberg', 95273973, 'example@gmail.com')
-
-flames.addAvailableMeal(10)
-taste.addAvailableMeal(10)
-
-const mohsin = new Beneficiary('mohsin', 23232323, 'abc@gmail.com')
-const zaib = new Beneficiary('zaib', 23232323, 'abc@gmail.com')
-
-mohsin.orderFrom(flames)
-zaib.orderFrom(flames)
-
-mohsin.orderFrom(taste)
-zaib.orderFrom(taste)
-
-const users = [flames, taste ]
-/* GET users listing. */
-router.get('/', (req, res) => {
-  let result = users
+router.get('/', async (req, res) => {
+  const query = {}
 
   if (req.query.name) {
-    result = users.filter(user => user.name == req.query.name)
+    query.name = req.query.name
   }
 
-  res.send(result)
+  if (req.query.address) {
+    query.address = req.query.address
+  }
+  res.send(await FoodAngel.find(query))
 })
 
-router.get('/:userId', (req, res) => {
-  const user = users[req.params.userId]
+router.get('/initialize', async (req, res) => {
+  const flames = await FoodAngel.create({
+    name: 'flames',
+    address: 'tonsberg',
+    cellPhone: 95273973,
+    email: 'example@gmail.com',
+  })
+  const taste = await FoodAngel.create({
+    name: 'taste',
+    address: 'bjerke',
+    cellPhone: 95273974,
+    email: 'example1@gmail.com',
+  })
+
+  await flames.addAvailableMeal(10)
+  await taste.addAvailableMeal(10)
+
+  const mohsin = await Beneficiary.create({ name: 'mohsin', phone: 23232323, email: 'abc@gmail.com' })
+  const zaib = await Beneficiary.create({ name: 'zaib', phone: 33232323, email: 'abcd@gmail.com' })
+
+  await mohsin.orderFrom(flames)
+  await zaib.orderFrom(flames)
+
+  await mohsin.orderFrom(taste)
+  await zaib.orderFrom(taste)
+
+  const users = [flames, taste]
+  const ben = [mohsin, zaib]
+
+  console.log(users)
+  console.log(ben)
+  res.sendStatus(200)
+})
+
+router.get('/:userId', async (req, res) => {
+  const user = await FoodAngel.findById([req.params.userId])
 
   if (user) res.render('user', { user })
   else res.sendStatus(404)
 })
 
-module.exports = router;
+module.exports = router
