@@ -1,24 +1,45 @@
+const mongoose = require('mongoose')
+const autopopulate = require('mongoose-autopopulate')
+
+const FoodAngelSchema = new mongoose.Schema({
+  name: String,
+  address: String,
+  cellPhone: Number,
+  availableMeal: {
+    type: Number,
+    default: 0,
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
+  beneficiaries: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Beneficiary',
+      autopopulate: true,
+    },
+  ],
+  totalMealDonated: {
+    type: Number,
+    default: 0,
+  },
+})
 // class foodAngels who will registers as food doners have some basic properties
+
 class FoodAngel {
-  constructor(name, address, cellPhone, email) {
-    this.name = name
-    this.address = address
-    this.availableMeal = 0
-    this.cellPhone = cellPhone
-    this.email = email
-    this.beneficiaries = []
-    this.totalMealDonated = 0
-  }
-
   // kind of another method which allow foodangels to see the name of all of their foodRecievers
-  addBeneficiaries(beneficiary) {
-      this.beneficiaries.push(beneficiary)
-      this.totalMealDonated++
-      this.availableMeal--
+  async addBeneficiaries(beneficiary) {
+    this.beneficiaries.push(beneficiary)
+    this.totalMealDonated++
+    this.availableMeal--
+    await beneficiary.save()
   }
 
-  addAvailableMeal(number) {
+  async addAvailableMeal(number) {
     this.availableMeal += number
+    await this.save()
   }
 
   get overView() {
@@ -28,4 +49,7 @@ class FoodAngel {
      has ${this.beneficiaries.length} beneficiarie(s)`
   }
 }
-module.exports = FoodAngel
+
+FoodAngelSchema.loadClass(FoodAngel)
+FoodAngelSchema.plugin(autopopulate)
+module.exports = mongoose.model('FoodAngel', FoodAngelSchema)
