@@ -34,7 +34,7 @@ class FoodAngel {
     this.beneficiaries.push(beneficiary)
     this.totalMealDonated++
     this.availableMeal--
-    await beneficiary.save()
+    await this.save()
   }
 
   async addAvailableMeal(number) {

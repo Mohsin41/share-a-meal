@@ -20,16 +20,17 @@ const beneficiarySchema = new mongoose.Schema({
 })
 class Beneficiary {
   async addFoodAngels(foodangel) {
-    this.foodangels.push(foodangel)
-    await foodangel.save()
+    await this.foodangels.push(foodangel)
   }
 
   // kind of order method which allow beneficiary to order and it also assign a unique order number for each order
-  orderFrom(foodangel) {
+  async orderFrom(foodangel) {
     const orderNumber = Math.round(Math.random() * 1000000)
     if (foodangel.availableMeal > 0) {
       foodangel.addBeneficiaries(this)
       this.addFoodAngels(foodangel)
+      await this.save()
+      await foodangel.save()
       return orderNumber
     }
 
