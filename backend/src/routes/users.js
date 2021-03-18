@@ -19,18 +19,23 @@ router.get('/', async (req, res) => {
 })
 
 router.get('/initialize', async (req, res) => {
-  const flames = await FoodAngel.create({
+  const flames = new FoodAngel({
     name: 'flames',
     address: 'tonsberg',
     cellPhone: 95273973,
     email: 'example@gmail.com',
   })
-  const taste = await FoodAngel.create({
+  await flames.setPassword('abc')
+  await flames.save()
+
+  const taste = new FoodAngel({
     name: 'taste',
     address: 'bjerke',
     cellPhone: 95273974,
     email: 'example1@gmail.com',
   })
+  await taste.setPassword('abc')
+  await taste.save()
 
   await flames.addAvailableMeal(10)
   await taste.addAvailableMeal(10)

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
+const passportLocalMongoose = require('passport-local-mongoose')
 
 const FoodAngelSchema = new mongoose.Schema({
   name: String,
@@ -8,11 +9,6 @@ const FoodAngelSchema = new mongoose.Schema({
   availableMeal: {
     type: Number,
     default: 0,
-  },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
   },
   beneficiaries: [
     {
@@ -52,4 +48,7 @@ class FoodAngel {
 
 FoodAngelSchema.loadClass(FoodAngel)
 FoodAngelSchema.plugin(autopopulate)
+FoodAngelSchema.plugin(passportLocalMongoose, {
+  usernameField: 'email',
+})
 module.exports = mongoose.model('FoodAngel', FoodAngelSchema)

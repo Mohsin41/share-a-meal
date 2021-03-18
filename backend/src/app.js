@@ -4,11 +4,15 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-
-require('./database-connection')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
+const passport = require('passport')
+const User = require('./models/foodangel.js')
+const mongooseConnection = require('./database-connection')
 
 const indexRouter = require('./routes/index')
 const usersRouter = require('./routes/users')
+const accountRouter = require('./routes/account.js')
 
 const app = express()
 
@@ -28,9 +32,29 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
+
+app.use(
+  session({
+    secret: 'thisisasupersecuresecretsecret',
+    store: new MongoStore({ mongooseConnection, stringify: false }),
+    cookie: {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      path: '/api',
+    },
+  })
+)
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(User.createStrategy())
+
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/', indexRouter)
+app.use('/api/account', accountRouter)
 app.use('/api/users', usersRouter)
 
 // catch 404 and forward to error handler
