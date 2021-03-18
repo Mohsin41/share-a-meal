@@ -1,15 +1,10 @@
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
-
+const passportLocalMongoose = require('passport-local-mongoose')
 // beneficiary class for food seeker with some basic properties
 const beneficiarySchema = new mongoose.Schema({
   name: String,
   cellPhone: Number,
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-  },
   foodangels: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -39,4 +34,7 @@ class Beneficiary {
 }
 beneficiarySchema.loadClass(Beneficiary)
 beneficiarySchema.plugin(autopopulate)
+beneficiarySchema.plugin(passportLocalMongoose, {
+  usernameField: 'email',
+})
 module.exports = mongoose.model('Beneficiary', beneficiarySchema)
