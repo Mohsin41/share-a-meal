@@ -1,13 +1,20 @@
+<script>
+import axios from 'axios'
+export default {
+  name: 'App',
+  async created() {
+    console.log((await axios.get('/api/account/session')).data)
+  },
+}
+</script>
+
 <template lang="pug">
   #app
     button.btn.btn-primary(type='button') Primary
     #nav
       router-link(to="/") Food Angels
-      
-    
-    router-view 
-  
-</template>
+    router-view   
+ </template>
 
 <style lang="scss">
 @import '@/assets/theme.scss';
