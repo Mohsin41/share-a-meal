@@ -1,6 +1,6 @@
 <script>
-import axios from 'axios'
 import AngelCard from '@/components/angel-card.vue'
+import { mapActions } from 'vuex'
 export default {
   name: 'AngelDetail',
   components: {
@@ -12,9 +12,12 @@ export default {
     }
   },
   async created() {
-    const userRequest = await axios.get(`/api/users/${this.$route.params.id}`)
-    this.user = userRequest.data
+     this.user = await this.fetchUser(this.$route.params.id)
   },
+  methods: {
+    ...mapActions(['fetchUser'])
+  }
+
 }
 </script>
 

@@ -1,6 +1,6 @@
 <script>
 // @ is an alias to /src
-import axios from 'axios'
+import { mapActions } from 'vuex'
 import AngelCard from '@/components/angel-card.vue'
 export default {
   name: 'FoodAngels',
@@ -13,9 +13,12 @@ export default {
     }
   },
   async created() {
-    const usersRequest = await axios.get('/api/users')
-    this.users = usersRequest.data
+    this.users = await this.fetchUsers()
   },
+   methods: {
+    ...mapActions(['fetchUsers'])
+  }
+
 }
 </script>
 
