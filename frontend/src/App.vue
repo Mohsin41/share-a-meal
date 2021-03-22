@@ -1,20 +1,29 @@
 <script>
-import axios from 'axios'
+import { mapActions } from 'vuex'
+
 export default {
   name: 'App',
-  async created() {
-    console.log((await axios.get('/api/account/session')).data)
-  },
+  methods: {
+    ...mapActions(['logout']),
+    async doLogout() {
+      await this.logout()
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
+
 
 <template lang="pug">
   #app
     button.btn.btn-primary(type='button') Primary
     #nav
-      router-link(to="/") Food Angels
+      router-link(to="/profile") Profile
+      router-link(to="/login") Login
+      router-link(to="/register") Register
+      a(@click="doLogout" href="#") Logout
     router-view   
- </template>
+</template>
 
 <style lang="scss">
 @import '@/assets/theme.scss';
