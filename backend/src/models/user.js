@@ -7,4 +7,4 @@ const baseOptions = {
 // eslint-disable-next-line no-unused-vars
 const User= mongoose.model('User', new mongoose.Schema({}, baseOptions));
 
-module.exports = mongoose.model('User')
+module.exports = User
