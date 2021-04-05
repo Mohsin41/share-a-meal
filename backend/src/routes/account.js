@@ -1,6 +1,6 @@
 const express = require('express')
 const passport = require('passport')
-const User = require('../models/foodangel.js')
+const User = require('../models/user.js')
 
 const router = express.Router()
 
@@ -34,3 +34,4 @@ router.delete('/session', async (req, res, next) => {
 })
 
 module.exports = router
+ 
