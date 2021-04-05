@@ -9,7 +9,9 @@ const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 const cors = require('cors')
 
-const User = require('./models/foodangel.js')
+const User = require('./models/user.js')
+// const FoodAngel = require('./models/foodangel.js')
+// const Beneficiary = require('./models/beneficiary.js')
 const mongooseConnection = require('./database-connection')
 
 const indexRouter = require('./routes/index')
