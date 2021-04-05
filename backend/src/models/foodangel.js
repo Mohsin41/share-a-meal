@@ -3,7 +3,7 @@ const autopopulate = require('mongoose-autopopulate')
 const passportLocalMongoose = require('passport-local-mongoose')
 const User = require('./user.js')
 
-const FoodAngelSchema = User.discriminator('foodangel',new mongoose.Schema({
+const FoodAngelSchema = new mongoose.Schema({
   name: String,
   address: String,
   cellPhone: Number,
@@ -23,8 +23,7 @@ const FoodAngelSchema = User.discriminator('foodangel',new mongoose.Schema({
     default: 0,
   },
 })
-)
-// class foodAngels who will registers as food doners have some basic properties
+
 
 class FoodAngel {
   // kind of another method which allow foodangels to see the name of all of their foodRecievers
@@ -48,9 +47,11 @@ class FoodAngel {
   }
 }
 
+
 FoodAngelSchema.loadClass(FoodAngel)
 FoodAngelSchema.plugin(autopopulate)
 FoodAngelSchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
 })
-module.exports = mongoose.model('FoodAngel', FoodAngelSchema)
+const doner=User.discriminator('foodangel' , FoodAngelSchema)
+module.exports = doner

@@ -3,7 +3,7 @@ const autopopulate = require('mongoose-autopopulate')
 const passportLocalMongoose = require('passport-local-mongoose')
 const User = require('./user.js')
 // beneficiary class for food seeker with some basic properties
-const beneficiarySchema = User.discriminator('beneficiary',new mongoose.Schema({
+const beneficiarySchema = new mongoose.Schema({
   name: String,
   cellPhone: Number,
   foodangels: [
@@ -13,7 +13,7 @@ const beneficiarySchema = User.discriminator('beneficiary',new mongoose.Schema({
       autopopulate: true,
     },
   ],
-}))
+})
 class Beneficiary {
   async addFoodAngels(foodangel) {
     await this.foodangels.push(foodangel)
@@ -38,4 +38,6 @@ beneficiarySchema.plugin(autopopulate)
 beneficiarySchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
 })
-module.exports = mongoose.model('Beneficiary', beneficiarySchema)
+
+const seeker=User.discriminator('beneficiary', beneficiarySchema)
+module.exports = seeker
