@@ -4,6 +4,7 @@ const baseOptions = {
     discriminatorKey: 'type',
     collection: 'User'
 }
-const User = mongoose.model('User', new mongoose.Schema({}, baseOptions));
+// eslint-disable-next-line no-unused-vars
+const User= mongoose.model('User', new mongoose.Schema({}, baseOptions));
 
-module.exports = mongoose.model('User',User)
+module.exports = mongoose.model('User')
