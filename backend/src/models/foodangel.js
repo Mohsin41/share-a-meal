@@ -22,7 +22,8 @@ const FoodAngelSchema = User.discriminator('foodangel',new mongoose.Schema({
     type: Number,
     default: 0,
   },
-}))
+})
+)
 // class foodAngels who will registers as food doners have some basic properties
 
 class FoodAngel {
