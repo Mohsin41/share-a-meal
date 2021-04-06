@@ -37,7 +37,7 @@ beneficiarySchema.loadClass(Beneficiary)
 beneficiarySchema.plugin(autopopulate)
 beneficiarySchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
-})
+}) 
 
 const seeker=User.discriminator('beneficiary', beneficiarySchema)
 module.exports = seeker

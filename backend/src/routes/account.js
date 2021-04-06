@@ -1,5 +1,7 @@
 const express = require('express')
 const passport = require('passport')
+require('../models/foodangel.js')
+require('../models/beneficiary.js')
 const User = require('../models/user.js')
 
 const router = express.Router()

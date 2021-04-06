@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const autopopulate = require('mongoose-autopopulate')
-const passportLocalMongoose = require('passport-local-mongoose')
+ const passportLocalMongoose = require('passport-local-mongoose')
 const User = require('./user.js')
 
 const FoodAngelSchema = new mongoose.Schema({
@@ -51,7 +51,8 @@ class FoodAngel {
 FoodAngelSchema.loadClass(FoodAngel)
 FoodAngelSchema.plugin(autopopulate)
 FoodAngelSchema.plugin(passportLocalMongoose, {
-  usernameField: 'email',
-})
+   usernameField: 'email',
+ })
 const doner=User.discriminator('foodangel' , FoodAngelSchema)
 module.exports = doner
+  
