@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
+// const autopopulate = require('mongoose-autopopulate')
  const passportLocalMongoose = require('passport-local-mongoose')
 const User = require('./user.js')
 
@@ -15,15 +15,15 @@ const FoodAngelSchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Beneficiary',
-      // autopopulate: { maxDepth:2 },
+     autopopulate: { maxDepth: 2, select: '-foodangels' },
     },
   ],
   totalMealDonated: {
     type: Number,
     default: 0,
-  },
+  }, 
 })
-
+ 
 
 class FoodAngel {
   // kind of another method which allow foodangels to see the name of all of their foodRecievers
@@ -49,10 +49,9 @@ class FoodAngel {
 
 
 FoodAngelSchema.loadClass(FoodAngel)
-FoodAngelSchema.plugin(autopopulate)
+// FoodAngelSchema.plugin(autopopulate)
 FoodAngelSchema.plugin(passportLocalMongoose, {
    usernameField: 'email',
  })
 const doner=User.discriminator('FoodAngel' , FoodAngelSchema)
 module.exports = doner
-   

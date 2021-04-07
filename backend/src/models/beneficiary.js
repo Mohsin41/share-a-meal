@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const autopopulate = require('mongoose-autopopulate')
+// const autopopulate = require('mongoose-autopopulate')
 const passportLocalMongoose = require('passport-local-mongoose')
 const User = require('./user.js')
 // beneficiary class for food seeker with some basic properties
@@ -10,7 +10,7 @@ const beneficiarySchema = new mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'FoodAngel',
-     // autopopulate:{ maxDepth:2 } ,
+      autopopulate:{ maxDepth: 2, select: '-beneficiaries'}, 
     },
   ],
 })
@@ -38,7 +38,7 @@ class Beneficiary {
   }
 }
 beneficiarySchema.loadClass(Beneficiary)
-beneficiarySchema.plugin(autopopulate)
+// beneficiarySchema.plugin(autopopulate)
 beneficiarySchema.plugin(passportLocalMongoose, {
   usernameField: 'email',
 }) 
