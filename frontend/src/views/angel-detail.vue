@@ -1,10 +1,12 @@
 <script>
 import AngelCard from '@/components/angel-card.vue'
+import beneficiaryProfile from '@/components/beneficiary-profile.vue'
 import { mapActions } from 'vuex'
 export default {
   name: 'AngelDetail',
   components: {
     AngelCard,
+    beneficiaryProfile,
   },
   data() {
     return {
@@ -24,5 +26,7 @@ export default {
 <template lang="pug">
   .about
     <h1>Here is the detail view</h1>
-    AngelCard(:user="user" v-if="user")
-</template>
+    h1 {{user.name}}! logged in as {{user.type}}:
+    AngelCard(:user="user" v-if="user.type=='FoodAngel'")
+    beneficiaryProfile(:user="user" v-else-if="user.type=='Beneficiary'")
+</template> 

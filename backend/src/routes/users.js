@@ -2,6 +2,8 @@ const express = require('express')
 
 const router = express.Router()
 
+const User = require('../models/user.js')
+
 const FoodAngel = require('../models/foodangel.js')
 const Beneficiary = require('../models/beneficiary.js')
 
@@ -15,7 +17,7 @@ router.get('/', async (req, res) => {
   if (req.query.address) {
     query.address = req.query.address
   }
-  res.send(await FoodAngel.find(query))
+  res.send(await User.find(query))
 })
 
 router.get('/initialize', async (req, res) => {
@@ -27,7 +29,7 @@ router.get('/initialize', async (req, res) => {
   })
   await flames.setPassword('abc')
   await flames.save()
-
+console.log("done")
   const taste = new FoodAngel({
     name: 'taste',
     address: 'bjerke',
@@ -40,8 +42,13 @@ router.get('/initialize', async (req, res) => {
   await flames.addAvailableMeal(10)
   await taste.addAvailableMeal(10)
 
-  const mohsin = await Beneficiary.create({ name: 'mohsin', phone: 23232323, email: 'abc@gmail.com' })
-  const zaib = await Beneficiary.create({ name: 'zaib', phone: 33232323, email: 'abcd@gmail.com' })
+  const mohsin = new Beneficiary({ name: 'mohsin', phone: 23232323, email: 'abc@gmail.com' })
+  await mohsin.setPassword('abc')
+  await mohsin.save()
+  
+  const zaib = new Beneficiary({ name: 'zaib', phone: 33232323, email: 'abcd@gmail.com' })
+  await zaib.setPassword('abc')
+  await zaib.save()
 
   await mohsin.orderFrom(flames)
   await zaib.orderFrom(flames)
@@ -49,16 +56,12 @@ router.get('/initialize', async (req, res) => {
   await mohsin.orderFrom(taste)
   await zaib.orderFrom(taste)
 
-  const users = [flames, taste]
-  const ben = [mohsin, zaib]
-
-  console.log(users)
-  console.log(ben)
+  
   res.sendStatus(200)
 })
 
 router.get('/:userId', async (req, res) => {
-  const user = await FoodAngel.findById([req.params.userId])
+  const user = await User.findById([req.params.userId])
 
   if (user) res.send(user)
   else res.sendStatus(404)
