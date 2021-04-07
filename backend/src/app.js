@@ -4,15 +4,15 @@ const express = require('express')
 const path = require('path')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
-require('./models/foodangel.js')
-require('./models/beneficiary.js')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
 const passport = require('passport')
 const cors = require('cors')
 
-const User = require('./models/user.js')
 
+require('./models/foodangel.js')
+require('./models/beneficiary.js')
+const User = require('./models/user.js')
 
 const mongooseConnection = require('./database-connection')
 
