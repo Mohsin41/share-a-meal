@@ -1,6 +1,6 @@
 <script>
 export default {
-    name:'AngelCard',
+    name:'beneficiaryProfile',
     props:['user']
 }
 </script>
@@ -9,14 +9,17 @@ export default {
 .box
     //div(v-if =user.type ==='FoodAngel' )
     h2 {{user.name}}
-    h3 AvailableMeal(s):({{user.availableMeal}})
+    h4 Doners:
+    div(v-for="foodangel in user.foodangels")
+        li {{ foodangel.name }}
+              
 </template>
 
 <style lang="scss" scoped>
  .box{
      padding:2rem;
      border:1px solid #333;
-     background:#dd0;
+     background:#ddd;
      border-radius:0.3rem;
  }
 </style>
