@@ -11,10 +11,10 @@ router.get('/session', (req, res) => {
   res.send(req.user)
 })
 router.post('/', async (req, res, next) => {
-  const { name, address, email, password } = req.body
+  const { name, cellPhone, email, password,type } = req.body
 
   try {
-    const user = await User.register({ name, address, email }, password)
+    const user = await User.register({ name, cellPhone, email,type }, password)
     res.send(user)
   } catch (e) {
     next(e)
@@ -28,7 +28,7 @@ router.post('/session', passport.authenticate('local', { failWithError: true }),
 router.delete('/session', async (req, res, next) => {
   await req.logout()
 
-  req.session.regenerate(err => {
+  req.session.regenerate(err => { 
     if (err) return next(err)
 
     return res.sendStatus(200)
