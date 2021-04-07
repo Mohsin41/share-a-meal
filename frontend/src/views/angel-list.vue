@@ -13,7 +13,10 @@ export default {
     }
   },
   async created() {
+
     this.users = await this.fetchUsers()
+    
+    //.filter(user => user.type=='Beneficiary')
   },
    methods: {
     ...mapActions(['fetchUsers'])
