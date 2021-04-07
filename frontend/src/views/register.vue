@@ -6,11 +6,12 @@ export default {
   data() {
     return {
       name: '',
-      address: '',
+      cellPhone: null,
       email: '',
       password: '',
-
+      type:   '',
       backendError: null,
+      
     }
   },
   methods: {
@@ -21,9 +22,10 @@ export default {
       try {
         await this.register({
           name: this.name,
-          address: this.address,
+          cellPhone: this.cellPhone,
           email: this.email,
           password: this.password,
+          type:this.type
         })
 
         this.$router.push('/login')
@@ -39,10 +41,18 @@ export default {
 .register
     form( @submit="submitLogin")
       h1 Create a new account
+      label(for="type") Type:&nbsp;
+        select(v-model='type') Type:&nbsp;
+          option(disabled value='' ) Please select one type
+          option(value='FoodAngel') Doner
+          option(value='Beneficiary') Seeker
+          // span {{ type }}
+
+      
       label(for="name") Name:&nbsp;
         input(v-model="name" id="name" type="text" placeholder="Your name" required)
-      label(for="age") Age:&nbsp;
-        input(v-model="address" id="address" type="text" placeholder="Your address" required)
+      label(for="cellPhone") Phone:&nbsp;
+        input(v-model="cellPhone" id="cellPhone" type="Number" placeholder="Your Number" required)
       label(for="email") Email:&nbsp;
         input(v-model="email" id="email" type="email" placeholder="Your email" required)
       label(for="password") Password:&nbsp;
