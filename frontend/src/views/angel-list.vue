@@ -14,7 +14,7 @@ export default {
   },
   async created() {
 
-    this.users = await this.fetchUsers()
+    this.users = (await this.fetchUsers())
     
     //.filter(user => user.type=='Beneficiary')
   },
