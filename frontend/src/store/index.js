@@ -14,14 +14,20 @@ const mutations = {
 }
 
 const store = new Vuex.Store({
-  state: {user: null},
+  state: {
+    user: null,
+    availableMeal: 0
+  },
+  
   mutations: {
     [mutations.SET_USER](state, user)
   {
       state.user = user
     }
-    },
-  actions: {async fetchUser(store, id) {
+  },
+  
+  actions: {
+       async fetchUser(store, id) {
       const userRequest = await axios.get(`/api/users/${id}`)
       return userRequest.data
     },
@@ -33,6 +39,14 @@ const store = new Vuex.Store({
       const user = await axios.get('/api/account/session')
       commit(mutations.SET_USER, user.data || null)
     },
+     async updateAvailableMeal({state}, availableMeal) {
+      // try {
+       await axios.patch(`/api/users/${state.user._id}`, { availableMeal })
+       
+     // } catch (e) {
+        
+      },
+    
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
@@ -50,8 +64,9 @@ const store = new Vuex.Store({
     }
 
 },
-  modules: {}
-});
+  modules : {}
+})
+
 export default async function init() {
   await store.dispatch('fetchSession')
   return store
