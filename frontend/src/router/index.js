@@ -4,7 +4,7 @@ import FoodAngels from '../views/angel-list.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
 import CreateMeal from '../views/create-meal.vue'
-
+import browseAngel from '../views/browse-angel.vue'
 
 Vue.use(VueRouter)
 
@@ -45,10 +45,11 @@ export default function init(store) {
         }
       },
       {
-        path: '/create-meal',
-        name: 'CreateMeal',
-        component: CreateMeal
+        path: '/browse-angel',
+        name: 'browseAngel',
+        component: browseAngel
       },
+      
       {
         path: '/profile',
         name: 'profile',
