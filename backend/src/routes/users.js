@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const express = require('express')
 
 const router = express.Router()
@@ -73,12 +74,21 @@ router.patch('/:userId', async (req, res) => {
   await user.save()
   console.log(user)
   console.log(req.params.userId)
-//   await user.addAvailableMeal(meals))
-//   const meals = req.body
-//   console.log(meals)
-//  const user = await User.findById(req.params.userId)
-//   await user.addAvailableMeal(meals)
+
   res.sendStatus(204)
 })
+// eslint-disable-next-line consistent-return
+router.post('/:Id/order', async (req, res) =>{
+   const user = await User.findById(req.params.Id)
+  console.log("user who order", user)
+
+  const angel = await User.findById(req.body._id)
+  console.log("angel who will donate",angel)
+
+  await user.orderFrom( angel)
+
+  res.sendStatus(204)
+})
+
 module.exports = router
  
