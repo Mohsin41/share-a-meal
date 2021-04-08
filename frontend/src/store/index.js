@@ -16,7 +16,8 @@ const mutations = {
 const store = new Vuex.Store({
   state: {
     user: null,
-    availableMeal: 0
+    availableMeal: 0,
+    
   },
   
   mutations: {
@@ -46,12 +47,16 @@ const store = new Vuex.Store({
      // } catch (e) {
         
       },
-    
+     async order({state},userId) {
+       await axios.post(`/api/users/${state.user._id}/order`, { _id:userId } )
+
+      // await dispatch('fetchCourses')
+    },
     async login({ commit }, credentials) {
       try {
         const user = await axios.post('/api/account/session', credentials)
         commit(mutations.SET_USER, user.data)
-      } catch (e) {
+      } catch (e) { 
         throw e
       }
     },
