@@ -37,6 +37,7 @@ class FoodAngel {
   async addAvailableMeal(number) {
     this.availableMeal += number
     await this.save()
+  
   }
 
   get overView() {
