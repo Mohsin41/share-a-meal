@@ -67,4 +67,18 @@ router.get('/:userId', async (req, res) => {
   else res.sendStatus(404)
 })
 
+router.patch('/:userId', async (req, res) => {
+  const user = await User.findById(req.params.userId)
+  user.availableMeal = req.body.availableMeal
+  await user.save()
+  console.log(user)
+  console.log(req.params.userId)
+//   await user.addAvailableMeal(meals))
+//   const meals = req.body
+//   console.log(meals)
+//  const user = await User.findById(req.params.userId)
+//   await user.addAvailableMeal(meals)
+  res.sendStatus(204)
+})
 module.exports = router
+ 

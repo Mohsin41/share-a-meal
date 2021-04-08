@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import FoodAngels from '../views/angel-list.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
+import CreateMeal from '../views/create-meal.vue'
 
 
 Vue.use(VueRouter)
@@ -42,6 +43,11 @@ export default function init(store) {
           if (store.state.user) return next('/profile')
           return next()
         }
+      },
+      {
+        path: '/create-meal',
+        name: 'CreateMeal',
+        component: CreateMeal
       },
       {
         path: '/profile',
