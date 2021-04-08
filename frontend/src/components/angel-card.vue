@@ -10,6 +10,7 @@ export default {
     //div(v-if =user.type ==='FoodAngel' )
     h2 {{user.name}}
     h3 AvailableMeal(s):({{user.availableMeal}})
+    router-link(to='/create-meal') AddMeal
 </template>
 
 <style lang="scss" scoped>
