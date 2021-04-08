@@ -12,6 +12,7 @@ export default {
     h4 Doners:
     div(v-for="foodangel in user.foodangels")
         li {{ foodangel.name }}
+    router-link(to='/browse-angel') Browse
               
 </template>
 
