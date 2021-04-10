@@ -49,7 +49,11 @@ export default function init(store) {
         name: 'browseAngel',
         component: browseAngel
       },
-      
+      {
+        path: '/create-meal',
+        name: 'CreateMeal',
+        component: CreateMeal
+      },
       {
         path: '/profile',
         name: 'profile',
