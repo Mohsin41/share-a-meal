@@ -1,6 +1,50 @@
 # Share-A-Meal
 
-an app in progress to help the underprevlidged ones to secure their Meals
+This is an app for meal donation.app has two type of users,one type can donate and othe can avail the meal .
+
+App is build by JavaScript technologies . In backend it has Node.js, Express.js and MongoDB. In frontend it uses Vue.js.
+
+# Installation
+
+Fork the repository.
+
+In the directory you would like to have the project, clone the repository
+
+```bash
+git@github.com:Mohsin41/share-a-meal.git
+```
+
+Open the project in your coding environment.
+
+# Install the dependencies
+
+```
+$ docker-compose up --build
+```
+
+# Run the stack
+
+```
+$ docker-compose up
+```
+
+# Access the stack from a browser
+
+Open up your /etc/hosts file.
+
+In UNIX and VSCode, it can be opened via the following
+
+```bash
+open /etc/hosts
+```
+
+In Windows you can use the path `C:\Windows\System32\Drivers\etc\hosts in Windows`
+
+Add the following line to your hosts file
+
+```
+127.0.0.1 picories.localhost
+```
 
 # LICENSE
 
