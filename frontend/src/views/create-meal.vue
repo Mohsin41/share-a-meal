@@ -18,6 +18,7 @@ export default {
         await this.updateAvailableMeal(
          this.availableMeal
         )
+       window.alert(`Successfully Added ${this.availableMeal } meals`)
         this.$router.push(`/ `) 
       } catch (e) {
         this.backendError = e.response.data.message
