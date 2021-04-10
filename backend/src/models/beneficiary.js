@@ -34,7 +34,7 @@ class Beneficiary {
       return orderNumber
     } 
 
-    return 'Oh snap,No meal available,please try next time'
+    return 'Oh snap! No meal available, please try next time'
   }
 }
 beneficiarySchema.loadClass(Beneficiary)

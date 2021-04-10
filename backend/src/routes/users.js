@@ -87,7 +87,7 @@ router.post('/:Id/order', async (req, res) =>{
 
   await user.orderFrom( angel)
 
-  res.sendStatus(204)
+  res.sendStatus(204) 
 })
 
 module.exports = router
