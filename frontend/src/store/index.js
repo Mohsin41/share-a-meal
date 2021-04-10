@@ -49,7 +49,7 @@ const store = new Vuex.Store({
       },
      async order({state},userId) {
        await axios.post(`/api/users/${state.user._id}/order`, { _id:userId } )
-
+       window.alert("hey you just got it")
       // await dispatch('fetchCourses')
     },
     async login({ commit }, credentials) {
